@@ -1,11 +1,10 @@
-from state import *
 
 """
     variables globales
 """
-etatInitial = -1
-etatFinal = 1
-etatStandard = 0
+ETATINITIAL = -1
+ETATFINAL = 1
+ETATSTANDARD = 0
 
 """
     Fonction principale
