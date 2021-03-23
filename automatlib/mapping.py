@@ -6,7 +6,7 @@ from automatlib.automat import *
 
 """
     Cette fonction permet de lire un fichier
-    et retire les retours à la ligne*
+    et retire les retours à la ligne
 """
 def readFile(fileName):
     try:
@@ -28,7 +28,6 @@ def readFile(fileName):
 def initAlphabet(alphabet):
 
     return list(alphabet.strip())
-
 
 """
     Creation d'une liste d'etats
@@ -89,7 +88,7 @@ def initAutomat(fileName):
 
 
 if __name__ == "__main__":
-    file_Name = "../Instances/AFD/afd1.txt"
+    file_Name = "../Instances/AFN/afn3.txt"
 
     automat = initAutomat(file_Name)
     automat.printAutomat()
