@@ -8,3 +8,6 @@ class State :
 
     def printState(self):
         print("Etat {op1}".format(op1 = self.name))
+
+    def getStateName(self):
+        return self.name

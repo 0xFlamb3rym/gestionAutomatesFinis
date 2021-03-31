@@ -11,3 +11,12 @@ class Transition :
     def printTransition(self):
         print("{op1} --> {op2} étiquette: {op3}".format(op1 = self.stateFrom,
               op2 = self.stateTo, op3 = self.label))
+
+    def getStateFrom(self):
+        return self.stateFrom
+
+    def getStateTo(self):
+        return self.stateTo
+
+    def getLabel(self):
+        return self.label

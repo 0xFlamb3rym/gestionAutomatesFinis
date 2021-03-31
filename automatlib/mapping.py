@@ -1,7 +1,5 @@
 import sys
 
-from automatlib.state import *
-from automatlib.transition import *
 from automatlib.automat import *
 
 """
@@ -86,11 +84,27 @@ def initAutomat(fileName):
 
     return automat
 
+"""
+    chargement d'une liste de mots
+"""
+def loadWordsFromFile(fileName):
+    fileData = readFile(fileName)
+
+    return fileData
 
 if __name__ == "__main__":
-    file_Name = "../Instances/AFN/afn3.txt"
+    file_Name = "../Instances/AFD/afd1.txt"
+    wordsFileName = "../Instances/AFD/mots1.txt"
 
     automat = initAutomat(file_Name)
     automat.printAutomat()
+
+    wordsList = loadWordsFromFile(wordsFileName)
+    print (wordsList)
+
+    for word in wordsList:
+        print(automat.validWordAFD(word))
+
+
 
 
