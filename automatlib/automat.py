@@ -1,5 +1,6 @@
 from automatlib.state import *
 from automatlib.transition import *
+import sys
 
 """
     Classe définissant un automate
@@ -167,6 +168,97 @@ class Automat :
                 return 1
 
         return 0
+
+    def minimization(self, exitFileName):
+        Classe = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII']
+
+        initialisation = []
+        initialisation1 = []
+        equal = 0
+        sState = []
+        tmpState = []
+        for i in range(len(self.states)):
+            if str(self.states[i].name) in self.finalStates:
+                initialisation.append(Classe[1])
+            else:
+                initialisation.append(Classe[0])
+
+        while equal != len(initialisation):
+            sState.clear()
+            tmpState.clear()
+
+            for i in range ( len ( self.states ) ) :
+                for symbol in self.alphabet :
+                    tmpState.append ( self.searchDstState ( str ( self.states[i].name ), symbol ) )
+                sState.append ( tmpState.copy () )
+                tmpState.clear ()
+
+            for i in range (len(sState)):
+                for j in range(len(sState[i])):
+                    sState[i][j] = initialisation[int(sState[i][j])]
+
+            classeValue = 0
+            for i in range(len(sState)):
+                if sState[i] in tmpState:
+                    var = tmpState.index(sState[i])
+                    initialisation1.append(Classe[var])
+                else:
+                    tmpState.append(sState[i])
+                    initialisation1.append(Classe[classeValue])
+                    classeValue = classeValue + 1
+
+            equal = 0
+            for i in range(len(initialisation)):
+                if initialisation[i] == initialisation1[i]:
+                    equal = equal + 1
+            initialisation = initialisation1.copy()
+            initialisation1.clear()
+        tmpState.clear()
+        newInitialisation = []
+        for i in range(len(initialisation)):
+            tmpState.append ( initialisation[i] )
+            for j in range(len(self.alphabet)):
+                tmpState.append(sState[i][j])
+            newInitialisation.append(tmpState.copy())
+            tmpState.clear()
+
+        nNewInitialisation = []
+        stateName = []
+        for i in range(len(initialisation)):
+            if newInitialisation[i] not in nNewInitialisation:
+                nNewInitialisation.append(newInitialisation[i])
+                stateName.append(i)
+
+        nbStates = len(nNewInitialisation)
+        newInitialStates = []
+        newFinalStates = []
+        for i in range(len(stateName)):
+            if str(stateName[i]) in self.initialStates:
+                newInitialStates.append(i)
+            if str(stateName[i]) in self.finalStates:
+                newFinalStates.append(i)
+
+        try :
+            file = open(exitFileName, "a")
+        except :
+            sys.exit("Fichier introuvable !!!")
+        for symbol in self.alphabet:
+            file.write("{opt1}".format(opt1 = symbol))
+        file.write("\n")
+        file.write("{opt1}".format(opt1 = nbStates))
+        for i in newInitialStates:
+            file.write ( "{opt1} ".format ( opt1 = i ) )
+        file.write ( "\n")
+        for i in newFinalStates:
+            file.write ( "{opt1} ".format ( opt1 = i ) )
+        file.write ( "\n")
+
+        file.close ()
+        """
+            A terminer !!!!!
+        """
+
+
 
 
     """

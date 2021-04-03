@@ -106,7 +106,3 @@ def loadWordsFromFile(fileName):
 
     return fileData
 
-"""if __name__ == "__main__":
-    file_Name = "../Instances/AFN/afn1.txt"
-    wordsFileName = "../Instances/AFN/mots1.txt"""""
-

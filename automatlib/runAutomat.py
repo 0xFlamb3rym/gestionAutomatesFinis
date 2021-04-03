@@ -19,3 +19,7 @@ def runAFN(automatFileName, words_FileName, exitFileName):
         res.append ( aAutomat.validWordAFN ( w ) )
 
     writeFile ( res, exitFileName )
+
+def runMinimization(automatFileName, exitFileName):
+    aAutomat = initAutomat (automatFileName)
+    aAutomat.minimization(exitFileName)
