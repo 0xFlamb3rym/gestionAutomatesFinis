@@ -47,6 +47,7 @@ class Automat :
             print ("Le label n'est pas valide !!!\r\n")
             return None
 
+        """"@TODO"""
 
     def addStates(self, newState):
         """Ajoute un etat"""
@@ -103,9 +104,28 @@ class Automat :
             if (str(srcState) == self.transitions[i].stateFrom) and (symbol == self.transitions[i].label):
                 return self.transitions[i].getStateTo()
 
+    def searchDStStates(self, srcState, symbol):
+        if self.validSymbol(symbol) == 0:
+            print("Le symbol n'est pas valide !!\r\n")
+            return None
+
+        res = []
+        if self.validState(int(srcState)) == 0:
+            print("L'etat n'est pas valide !!\r\n")
+            return None
+
+        for i in range(len(self.transitions)):
+            if (str(srcState) == self.transitions[i].stateFrom) and (symbol == self.transitions[i].label):
+                res.append(self.transitions[i].getStateTo())
+
+        if len(res) > 0:
+            return res
+
+        return srcState
+
     def validWordAFD(self, word):
         """Dans le cas d'un AFD verifie si le mot est accepté ou pas
-        @:return 1 si le mot est accepté sinon 0"""
+                @:return 1 si le mot est accepté sinon 0"""
         currentState = self.initialStates[0]
         for w in word:
             """Verifie si le mot/symbole est est valide"""
@@ -125,6 +145,28 @@ class Automat :
 
         return 0
 
+    def validWordAFN(self, word):
+        """Dans le cas d'un AFN verifie si le mot est accepté ou pas
+                @:return 1 si le mot est accepté sinon 0"""
+        currentState = []
+        nextState = []
+
+        for sState in self.initialStates:
+            currentState.append(sState)
+
+        for w in word:
+            for current in currentState:
+                nextState += self.searchDStStates(current, w)
+
+            nextState = list(set(nextState))
+            currentState = nextState.copy()
+            nextState.clear()
+
+        for current in currentState:
+            if current in self.finalStates:
+                return 1
+
+        return 0
 
 
     """

@@ -21,6 +21,20 @@ def readFile(fileName):
     return file_data
 
 """
+    Cette fonction permet d'ecrire dans un fichier
+"""
+def writeFile(fileData, fileName):
+    try :
+        file = open(fileName, "a")
+    except :
+        sys.exit("Fichier introuvable !!!")
+
+    for data in fileData:
+        file.write("{op1}\n".format(op1 = data))
+
+    file.close()
+
+"""
     Initialisation de l'alphabet
 """
 def initAlphabet(alphabet):
@@ -79,10 +93,10 @@ def initAutomat(fileName):
         transitions.append(initTransition(fileData[i]))
 
     """Creation de l'automate"""
-    automat = Automat(alphabet, states, initialStates,
-                      finalStates, transitions)
+    Automate = Automat( alphabet, states, initialStates,
+                        finalStates, transitions )
 
-    return automat
+    return Automate
 
 """
     chargement d'une liste de mots
@@ -92,19 +106,7 @@ def loadWordsFromFile(fileName):
 
     return fileData
 
-if __name__ == "__main__":
-    file_Name = "../Instances/AFD/afd1.txt"
-    wordsFileName = "../Instances/AFD/mots1.txt"
-
-    automat = initAutomat(file_Name)
-    automat.printAutomat()
-
-    wordsList = loadWordsFromFile(wordsFileName)
-    print (wordsList)
-
-    for word in wordsList:
-        print(automat.validWordAFD(word))
-
-
-
+"""if __name__ == "__main__":
+    file_Name = "../Instances/AFN/afn1.txt"
+    wordsFileName = "../Instances/AFN/mots1.txt"""""
 
