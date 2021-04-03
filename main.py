@@ -1,7 +1,7 @@
 from automatlib.runAutomat import *
 import sys
 
-mode = [0, 1, 2]
+mode = ['0', '1', '2']
 
 if __name__ == "__main__":
 
@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     else :
         if sys.argv[1] in mode:
-            if int(sys.argv[1]) == mode[0]:     #Prise en charge des AFD
+            if sys.argv[1] == mode[0]:     #Prise en charge des AFD
                 runAFD (sys.argv[2], sys.argv[3], sys.argv[4])
-            if int(sys.argv[1]) == mode[1]:     #Minimisation d'un AFD
+            if sys.argv[1] == mode[1]:     #Minimisation d'un AFD
                 runMinimization(sys.argv[2], sys.argv[3])
